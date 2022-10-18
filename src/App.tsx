@@ -6,20 +6,28 @@ import AddArea from "./components/AddArea/index";
 
 const App = () => {
   const [list, setList] = useState<Item[]>([
-    { id: 1, name: "Teste 1", done: true },
-    { id: 2, name: "Teste 2", done: true },
-    { id: 3, name: "Teste 3", done: true },
-    { id: 4, name: "Teste 4", done: false },
-    { id: 5, name: "Teste 5", done: false },
-    { id: 6, name: "Teste 6", done: false },
+    { id: 1, name: "Comprar bolo na padaria", done: true },
+    { id: 2, name: "Comprar pão", done: false },
   ]);
+
+  const handleAddTask = (taskName: string) => {
+    let newList = [...list];
+
+    newList.push({
+      id: list.length + 1,
+      name: taskName,
+      done: false,
+    });
+
+    setList(newList);
+  };
 
   return (
     <Container>
       <Area>
-        <Header>Task list</Header>
+        <Header>Lista de Tarefas</Header>
 
-        <AddArea />
+        <AddArea onEnter={handleAddTask} />
 
         {list.map((item, index) => (
           <ListItem key={index} item={item} />
